@@ -1,0 +1,36 @@
+
+export const CREATE_USER_TABLE = `CREATE TABLE IF NOT EXISTS
+users(
+  id SERIAL PRIMARY KEY,
+  firstName VARCHAR(128) NOT NULL,
+  lastNAme VARCHAR(128) NOT NULL,
+  email VARCHAR(128) UNIQUE NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  createdOn VARCHAR(128) NOT NULL,
+  userType VARCHAR(128) NOT NULL,
+  IsAdmin BOOLEAN NOT NULL
+)`;
+
+export const CREATE_ACCOUNT_TABLE = `CREATE TABLE IF NOT EXISTS
+account(
+  id SERIAL PRIMARY KEY,
+  accNo SERIAL NOT NULL,
+  owner SERIAL,
+  type VARCHAR(128) NOT NULL,
+  status VARCHAR(128) NOT NULL,
+  createdOn TIMESTAMP,
+  BALANCE FLOAT NOT NULL
+)`;
+export const CREATE_TRANSACTION_TABLE = `CREATE TABLE IF NOT EXISTS
+transaction(
+  id SERIAL PRIMARY KEY,
+  accNo VARCHAR(128) NOT NULL,
+  type VARCHAR(128) NOT NULL,
+  cashier SERIAL,
+  amount FLOAT,
+  oldBalance FLOAT,
+  newBalance FLOAT NOT NULL,
+  createdOn VARCHAR
+)`;
+
+
