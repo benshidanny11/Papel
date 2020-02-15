@@ -2,7 +2,8 @@ import db from '../db/connection/query';
 import {
   CREATE_TRANSACTION,
   GET_ACCOUNT_DETAILS,
-  UPDATE_ACCOUNT_BALANCE
+  UPDATE_ACCOUNT_BALANCE,
+  GET_TRANSACTION_HISTORY
 } from '../db/queries/dataManipuration';
 import moment from 'moment';
 class Transaction {
@@ -63,6 +64,30 @@ class Transaction {
       });
     });
   }
+
+  async viewHistory(req,res){
+    db.query(GET_TRANSACTION_HISTORY,[req.params.accNo]).then((historyTran)=>{
+      if(historyTran.rows[0]){
+       res.status(200).send({
+         status: 200,
+         Message:'Transaction found',
+         data: historyTran.rows
+       });
+      }else{
+       res.status(200).send({
+         status: 200,
+         message: "No history found!",
+       });
+      }
+    }).catch((err) => {
+     res.status(400).send({
+       status: 400,
+       error: err.message
+     });
+   });
+   }
+
+
 
 }
 

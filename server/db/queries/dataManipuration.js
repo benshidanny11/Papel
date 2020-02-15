@@ -17,3 +17,5 @@ export const CREATE_TRANSACTION = `INSERT INTO
 transaction(accNo, type, amount, oldBalance, newBalance, createdOn)
       VALUES($1, $2, $3, $4, $5,$6) returning *`;
 export const UPDATE_ACCOUNT_BALANCE = 'UPDATE account set balance = $1 where accNo = $2'
+export const GET_TRANSACTION_HISTORY = 'SELECT * FROM transaction WHERE accNo=$1';
+export const GET_ACCOUNT_BY_OWNER = 'SELECT * FROM account WHERE accNo=$1 AND owner=$2';
