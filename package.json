@@ -1,0 +1,54 @@
+{
+  "name": "papel",
+  "version": "1.0.0",
+  "description": "Papel is a light-weight core banking application that powers banking operations like account",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node Server/App.js",
+    "build": "babel Server --out-dir dist",
+    "start": "npm run build && node dist/App.js",
+    "heroku-postbuild": "npm install --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benshidanny11/Papel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benshidanny11/Papel/issues"
+  },
+  "engines": {
+    "npm": "6.4.1",
+    "node": "10.15.1"
+  },
+  "homepage": "https://github.com/benshidanny11/Papel#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "rimraf": "^3.0.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.8.4",
+    "regenerator-runtime": "^0.13.3",
+    "nodemon": "^1.19.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "pg": "^7.12.1"
+  }
+}
