@@ -1,0 +1,10 @@
+import express from 'express';
+import Account from '../controllers/Account';
+import { isStaffOrAdmin } from '../middleware/acoount';
+import Auth from '../middleware/Auth';
+const router = express.Router();
+router.post('/client/account/create',Auth.verifyToken, Account.createAccount);
+router.get('/user/:id/accounts', Auth.verifyToken,isStaffOrAdmin, Account.getAllAccountOwnedBySpecificUser);
+router.get('/accounts/:accNo', Auth.verifyToken, Account.getSpecificAccountDetails);
+router.get('/accounts', Auth.verifyToken, isStaffOrAdmin, Account.getAllBankAccounts);
+export default router;
