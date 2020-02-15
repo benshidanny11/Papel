@@ -2,7 +2,8 @@ import db from '../db/connection/query';
 import {
   CREATE_TRANSACTION,
   GET_ACCOUNT_DETAILS,
-  UPDATE_ACCOUNT_BALANCE
+  UPDATE_ACCOUNT_BALANCE,
+  GET_TRANSACTION_HISTORY
 } from '../db/queries/dataManipuration';
 import moment from 'moment';
 class Transaction {
@@ -13,14 +14,14 @@ class Transaction {
         db.query(UPDATE_ACCOUNT_BALANCE, [account.rows[0].balance + req.body.amount, req.body.accNo]).then(() => {
           res.status(201).send({
             status: 201,
-            Message: "You have created a transaction sussesfully",
+            message: "You have created a transaction sussesfully",
             data: account.rows[0],
           });
         })
       }).catch((err) => {
         res.status(400).send({
           status: 400,
-          Error: err.message
+          error: err.message
         });
       });
     }).catch((err) => {
@@ -63,6 +64,30 @@ class Transaction {
       });
     });
   }
+
+  async viewHistory(req,res){
+    db.query(GET_TRANSACTION_HISTORY,[req.params.accNo]).then((historyTran)=>{
+      if(historyTran.rows[0]){
+       res.status(200).send({
+         status: 200,
+         Message:'Transaction found',
+         data: historyTran.rows
+       });
+      }else{
+       res.status(200).send({
+         status: 200,
+         message: "No history found!",
+       });
+      }
+    }).catch((err) => {
+     res.status(400).send({
+       status: 400,
+       error: err.message
+     });
+   });
+   }
+
+
 
 }
 
