@@ -13,14 +13,14 @@ class Transaction {
         db.query(UPDATE_ACCOUNT_BALANCE, [account.rows[0].balance + req.body.amount, req.body.accNo]).then(() => {
           res.status(201).send({
             status: 201,
-            Message: "You have created a transaction sussesfully",
+            message: "You have created a transaction sussesfully",
             data: account.rows[0],
           });
         })
       }).catch((err) => {
         res.status(400).send({
           status: 400,
-          Error: err.message
+          error: err.message
         });
       });
     }).catch((err) => {

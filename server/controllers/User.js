@@ -17,10 +17,14 @@ class User {
     Auth.generateToken(req.body.email).then((token)=>{
       db.query(CREATE_USER, values).then((user) => {
         res.status(201).send({
-          Token:token,
+          token:token,
           status: 201,
           Message:"You're signed up sussesfully",
-          data: user.rows[0],
+          data: {
+            firstName:user.rows[0].firstname,
+            lastName:user.rows[0].lastname,
+            email:user.rows[0].email
+          },
         });
       }).catch((err) => {
         res.status(400).send({
@@ -41,10 +45,14 @@ class User {
       db.query(LOGIN_QUERY,[req.body.email,req.body.password]).then((user)=>{
        if(user.rows[0]){
         res.status(201).send({
-          Token:token,
+          token:token,
           status: 201,
           Message:"You're logged in sussesfully",
-          data: user.rows[0],
+           data: {
+            firstName:user.rows[0].firstname,
+            lastName:user.rows[0].lastname,
+            email:user.rows[0].email
+          },
         });
        }else{
         res.status(400).send({
