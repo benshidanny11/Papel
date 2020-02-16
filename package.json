@@ -4,11 +4,14 @@
   "description": "Papel is a light-weight core banking application that powers banking operations like account",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:reset": "babel-node Server/db/migration/migrateReset.js",
+    "test": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
     "dev": "nodemon --exec babel-node Server/App.js",
+    "test-travis": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
     "build": "babel Server --out-dir dist",
     "start": "npm run build && node dist/App.js",
-    "heroku-postbuild": "npm install --production"
+    "heroku-postbuild": "npm install --production",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -42,13 +45,25 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "@babel/runtime": "^7.8.4",
-    "regenerator-runtime": "^0.13.3",
-    "nodemon": "^1.19.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "pg": "^7.12.1"
+    "nodemon": "^1.19.1",
+    "pg": "^7.12.1",
+    "random": "^2.1.1",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "nyc": {
+    "require": "@babel/register",
+    "exclude": [
+      "UI",
+      "Server/db/migration/db.js"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ]
   }
 }
