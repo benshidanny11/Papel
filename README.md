@@ -1,4 +1,7 @@
 # Papel
+[![Build Status](https://travis-ci.com/benshidanny11/Papel.svg?branch=ch-tests-171293049)](https://travis-ci.com/benshidanny11/Papel)
+[![Coverage Status](https://coveralls.io/repos/github/benshidanny11/Papel/badge.svg?branch=ch-tests-171293049)](https://coveralls.io/github/benshidanny11/Papel?branch=ch-tests-171293049)
+
 [Open app here](https://benshidanny11.github.io/Papel/UI)
 Papel is a light-weight core banking application that powers banking operations like account creation, customer deposits, and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.
 
