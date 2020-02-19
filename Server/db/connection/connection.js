@@ -4,6 +4,8 @@ dotenv.config();
 import config from './configFile';
 class Connection {
   constructor() {
+    console.log(config.test)
+
     this.getPoolConnection = () => new Pool(config[process.env.NODE_ENV]);
   }
 }

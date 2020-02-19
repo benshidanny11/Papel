@@ -215,7 +215,9 @@ describe('Account and Transaction', () => {
           .send({
             "accNo": accNo1,
             "amount": 5000,
+
             "type": "debit"
+
           }).end((req, res) => {
             expect(res).to.have.status(403);
             expect(res.body).to.have.property('message');
@@ -231,6 +233,7 @@ describe('Account and Transaction', () => {
             "accNo": accNo1,
             "amount": 5000,
             "type": "debit"
+
           }).end((req, res) => {
             expect(res).to.have.status(201);
             expect(res.body).to.have.property('data');
@@ -259,7 +262,9 @@ describe('Account and Transaction', () => {
           .send({
             "accNo": accNo1,
             "amount": 5000,
+
             "type": "debit"
+
           }).end((req, res) => {
             expect(res).to.have.status(403);
             expect(res.body).to.have.property('message');
@@ -275,6 +280,7 @@ describe('Account and Transaction', () => {
             "accNo": accNo1,
             "amount": 5000,
             "type": "debit"
+
           }).end((req, res) => {
             expect(res).to.have.status(201);
             expect(res.body).to.have.property('data');
@@ -289,7 +295,9 @@ describe('Account and Transaction', () => {
           .send({
             "accNo": accNo1,
             "amount": 10000000,
+
             "type": "debit"
+
           }).end((req, res) => {
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('message');

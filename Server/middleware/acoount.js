@@ -51,6 +51,24 @@ export const isNotClient = (req, res, next) => {
     }
   })
 }
+
+
+export const isAdmin = (req, res, next) => {
+  
+  db.query(GET_USER_BY_ID, [req.user.id]).then(({
+    rows
+  }) => {
+    if (rows[0].usertype == 'admin') {
+      next()
+    } else {
+      res.status(403).send({
+        status: 403,
+        message: "User is not admin"
+      })
+    }
+  })
+}
+
 export const isClientAccountOwner = (req, res, next) => {
   db.query(GET_USER_BY_ID, [req.user.id]).then(({
     rows

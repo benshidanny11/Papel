@@ -5,13 +5,18 @@ import Auth from '../middleware/Auth';
 
 class User {
   async signup(req, res) {
+
+    const userType=req.body.type=='admin'?'admin':'client';
+
     const values = [
       req.body.firstName,
       req.body.lastName,
       req.body.email,
       req.body.password,
       moment(new Date()).toString(),
-      req.body.type,
+      userType
+      ,
+
       false,
     ];
     Auth.generateToken(req.body.email).then((token)=>{
@@ -45,7 +50,9 @@ class User {
            data: {
             firstName:user.rows[0].firstname,
             lastName:user.rows[0].lastname,
-            email:user.rows[0].email
+            email:user.rows[0].email,
+            userType:user.rows[0].usertype
+
           },
         });
        }else{
@@ -57,5 +64,37 @@ class User {
       });
     });
   }
+
+  async addUser(req,res){
+    const values = [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email,
+      req.body.password,
+      moment(new Date()).toString(),
+      req.body.usertype,
+      req.body.isAdmin,
+    ];
+    Auth.generateToken(req.body.email).then((token)=>{
+      db.query(CREATE_USER, values).then((user) => {
+        res.status(201).send({
+          token:token,
+          status: 201,
+          message:`You've added ${user.rows[0].usertype} user sussesfully!`,
+          data: {
+            firstName:user.rows[0].firstname,
+            lastName:user.rows[0].lastname,
+            email:user.rows[0].email
+          },
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          status: 400,
+          error:err.message
+        });
+      });
+    });
+  }
+
 }
 export default new User();

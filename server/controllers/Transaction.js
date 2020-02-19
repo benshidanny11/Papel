@@ -9,8 +9,9 @@ import moment from 'moment';
 class Transaction {
   async debitTransaction(req, res) {
     db.query(GET_ACCOUNT_DETAILS, [req.body.accNo]).then((account) => {
-      console.log(account.rows)
-      const data = [req.body.accNo, req.body.type, req.body.amount, account.rows[0].balance,account.rows[0].balance + req.body.amount, moment(new Date())];
+ 
+      const data = [req.body.accNo, 'debit', req.body.amount, account.rows[0].balance,account.rows[0].balance + req.body.amount, moment(new Date())];
+
       db.query(CREATE_TRANSACTION, data).then(() => {
         db.query(UPDATE_ACCOUNT_BALANCE, [account.rows[0].balance + req.body.amount, req.body.accNo]).then(() => {
           res.status(201).send({
@@ -31,7 +32,7 @@ class Transaction {
   async creditTransaction(req, res) {
     db.query(GET_ACCOUNT_DETAILS, [req.body.accNo]).then((account) => {
       if(account.rows[0].balance >= req.body.amount){
-        const data = [req.body.accNo, req.body.type, req.body.amount, account.rows[0].balance,account.rows[0].balance - req.body.amount, moment(new Date())];
+        const data = [req.body.accNo, 'credit', req.body.amount, account.rows[0].balance,account.rows[0].balance - req.body.amount, moment(new Date())];
       db.query(CREATE_TRANSACTION, data).then((transaction) => {
 
         db.query(UPDATE_ACCOUNT_BALANCE, [account.rows[0].balance + req.body.amount, req.body.accNo]).then(() => {

@@ -5,7 +5,8 @@
   "main": "App.js",
   "scripts": {
     "db:reset": "babel-node Server/db/migration/migrateReset.js",
-    "test": "set NODE_ENV = test && npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
+    "test": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
+
     "dev": "nodemon --exec babel-node Server/App.js",
     "test-travis": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
     "build": "babel Server --out-dir dist",
