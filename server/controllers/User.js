@@ -58,6 +58,7 @@ class User {
         });
        }
       });
+
     });
   }
 
@@ -89,6 +90,7 @@ class User {
           error:err.message
         });
       });
+
     });
   }
 }

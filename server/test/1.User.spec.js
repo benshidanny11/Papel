@@ -5,8 +5,10 @@ import chai from 'chai';
 import chaihttp from 'chai-http';
 import server from '../App';
 chai.use(chaihttp);
+
 let tokenStaff;
 let tokenClient;
+
 describe('User', () => {
   describe('User routers', () => {
     describe('Welcom user', () => {
@@ -35,6 +37,7 @@ describe('User', () => {
           done();
         })
       });
+
       it('Should Create admin user if data is valid', (done) => {
         chai.request(server).post('/user/signup').send({
           "firstName": "Danny1",
@@ -50,6 +53,7 @@ describe('User', () => {
           done();
         })
       });
+
       it('Should return error when user alread exits', (done) => {
         chai.request(server).post('/user/signup').send({
           "firstName": "Danny1",
@@ -72,7 +76,9 @@ describe('User', () => {
           "email": "danny9900000@gmail.com",
           "password": "Danny123",
         }).end((req, res) => {
+
           tokenClient=res.body.token;
+
           expect(res).to.have.status(200);
           expect(res.body).to.have.property('token');
           expect(res.body).to.be.an('object')

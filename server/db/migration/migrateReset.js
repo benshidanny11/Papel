@@ -7,4 +7,6 @@ setTimeout(() => {
 }, 5000);
 setTimeout(() => {
     process.exit();
+
 }, 15000)
+

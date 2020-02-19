@@ -5,7 +5,9 @@ import Auth from '../middleware/Auth';
 
 class User {
   async signup(req, res) {
+
     const userType=req.body.type=='admin'?'admin':'client';
+
     const values = [
       req.body.firstName,
       req.body.lastName,
@@ -14,6 +16,7 @@ class User {
       moment(new Date()).toString(),
       userType
       ,
+
       false,
     ];
     Auth.generateToken(req.body.email).then((token)=>{
@@ -49,6 +52,7 @@ class User {
             lastName:user.rows[0].lastname,
             email:user.rows[0].email,
             userType:user.rows[0].usertype
+
           },
         });
        }else{
@@ -91,5 +95,6 @@ class User {
       });
     });
   }
+
 }
 export default new User();

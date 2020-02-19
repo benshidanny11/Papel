@@ -50,6 +50,7 @@ export const isNotClient = (req, res, next) => {
       })
     }
   })
+
 }
 
 export const isAdmin = (req, res, next) => {
@@ -66,6 +67,7 @@ export const isAdmin = (req, res, next) => {
       })
     }
   })
+
 }
 export const isClientAccountOwner = (req, res, next) => {
   db.query(GET_USER_BY_ID, [req.user.id]).then(({
