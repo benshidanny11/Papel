@@ -1,0 +1,69 @@
+{
+  "name": "papel",
+  "version": "1.0.0",
+  "description": "Papel is a light-weight core banking application that powers banking operations like account",
+  "main": "App.js",
+  "scripts": {
+    "db:reset": "babel-node Server/db/migration/migrateReset.js",
+    "test": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
+    "dev": "nodemon --exec babel-node Server/App.js",
+    "test-travis": "npm run db:reset && nyc mocha server/test/*.spec.js  --exit",
+    "build": "babel Server --out-dir dist",
+    "start": "npm run build && node dist/App.js",
+    "heroku-postbuild": "npm install --production",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benshidanny11/Papel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benshidanny11/Papel/issues"
+  },
+  "engines": {
+    "npm": "6.4.1",
+    "node": "10.15.1"
+  },
+  "homepage": "https://github.com/benshidanny11/Papel#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "rimraf": "^3.0.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.8.4",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
+    "pg": "^7.12.1",
+    "random": "^2.1.1",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "nyc": {
+    "require": "@babel/register",
+    "exclude": [
+      "UI",
+      "Server/db/migration/db.js"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ]
+  }
+}
