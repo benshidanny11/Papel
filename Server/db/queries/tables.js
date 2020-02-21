@@ -16,17 +16,17 @@ account(
   id SERIAL PRIMARY KEY,
   accNo SERIAL NOT NULL,
   owner SERIAL,
-  type VARCHAR(128) NOT NULL,
-  status VARCHAR(128) NOT NULL,
+  type VARCHAR(128),
+  status VARCHAR(128),
   createdOn TIMESTAMP,
-  BALANCE FLOAT NOT NULL
+  BALANCE FLOAT 
 )`;
 export const DROP_ACCOUNT_TABLE = 'DROP TABLE IF EXISTS account'
 export const CREATE_TRANSACTION_TABLE = `CREATE TABLE IF NOT EXISTS
 transaction(
   id SERIAL PRIMARY KEY,
   accNo VARCHAR(128) NOT NULL,
-  type VARCHAR(128) NOT NULL,
+  type VARCHAR(128),
   cashier SERIAL,
   amount FLOAT,
   oldBalance FLOAT,
